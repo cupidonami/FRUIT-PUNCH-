@@ -26,6 +26,11 @@ function iniciarJuego() {
     }
 
     function combate(callback) {
+        let spanVidasJugador = document.getElementById("vidas-jugador")
+        let spanVidasEnemigo = document.getElementById("vidas-enemigo")
+    
+      if (vidasEnemigo > 0 && vidasJugador > 0) {
+
         if (ataqueJugador == ataqueEnemigo) {
             callback("EMPATE");
         } else if ((ataqueJugador == "Citrico" && ataqueEnemigo == "Secos") ||
@@ -34,7 +39,10 @@ function iniciarJuego() {
             callback("GANASTE");
         } else {
             callback("PERDISTE");
-        }
+        } vidasJugador--
+        spanVidasJugador.innerHTML = vidasJugador;
+        ;
+      }
     }
 
     combate(function(resultado) {
