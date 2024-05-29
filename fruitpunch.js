@@ -3,26 +3,41 @@ function btnfruitJugadorA() {
 }
 
 function iniciarJuego() {
-}
+    let ataqueJugador, ataqueEnemigo;
 
-    let btnfruitJugador = document.getElementById('btnfruit');
-    btnfruitJugador.addEventListener('click', btnfruitJugadorA);
-    
-    window.addEventListener('load', iniciarJuego);
+    function ataqueCitrico() {
+        ataqueJugador = "Citrico";
+        alert(ataqueJugador);
+        ataqueEnemigo = atributoDeAtaqueEnemigo();
+    }
 
-    function selectFrutaGamer() {
-        let inputsandia = document.getElementById('sandia').innerHTML;
-        let inputcereza = document.getElementById('cereza').innerHTML;
-        let inputavellana = document.getElementById('avellana').innerHTML;
-        let inputpapaya = document.getElementById('papaya').innerHTML;
-    
-        if (inputsandia.checked) {
-            alert("Usted ha seleccionado SANDIA");
-        } else if (inputcereza.checked) {
-            alert("Usted ha seleccionado CEREZA");
-        } else if (inputavellana.checked) {
-            alert("Usted ha seleccionado AVELLANA");
-        } else if (inputpapaya.checked) {
-            alert("Usted ha seleccionado PAPAYA");
+    function atributoDeAtaqueEnemigo() {
+        let atributo = "";
+        let atributoAleatorio = aleatorio(1, 3);
+
+        if (atributoAleatorio == 1) {
+            atributo = "Citrico";
+        } else if (atributoAleatorio == 2) {
+            atributo = "Dulce";
+        } else if (atributoAleatorio == 3) {
+            atributo = "Tropical";
         }
-    }    
+        return atributo;
+    }
+
+    function combate(callback) {
+        if (ataqueJugador == ataqueEnemigo) {
+            callback("EMPATE");
+        } else if ((ataqueJugador == "Citrico" && ataqueEnemigo == "Secos") ||
+            (ataqueJugador == "Seco" && ataqueEnemigo == "Tropical") ||
+            (ataqueJugador == "Dulce" && ataqueEnemigo == "Seco")) {
+            callback("GANASTE");
+        } else {
+            callback("PERDISTE");
+        }
+    }
+
+    combate(function(resultado) {
+        crearMensaje(resultado);
+    });
+}
